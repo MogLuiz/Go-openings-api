@@ -2,7 +2,7 @@ package handler
 
 import "fmt"
 
-func throwNewEmptyError(name, typ string) error {
+func throwEmptyError(name, typ string) error {
 	return fmt.Errorf("param: %s (type: %s) is required", name, typ)
 }
 
@@ -21,22 +21,22 @@ func (r *CreateOpeningRequest) Validate() error {
 		return fmt.Errorf("request body is empty or malformed")
 	}
 	if r.Role == "" {
-		return throwNewEmptyError("role", "string")
+		return throwEmptyError("role", "string")
 	}
 	if r.Company == "" {
-		return throwNewEmptyError("company", "string")
+		return throwEmptyError("company", "string")
 	}
 	if r.Location == "" {
-		return throwNewEmptyError("location", "string")
+		return throwEmptyError("location", "string")
 	}
 	if r.Link == "" {
-		return throwNewEmptyError("link", "string")
+		return throwEmptyError("link", "string")
 	}
 	if r.Remote == nil {
-		return throwNewEmptyError("remote", "bool")
+		return throwEmptyError("remote", "bool")
 	}
 	if r.Salary <= 0 {
-		return throwNewEmptyError("salary", "int64")
+		return throwEmptyError("salary", "int64")
 	}
 
 	return nil
