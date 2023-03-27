@@ -3,11 +3,16 @@ package handler
 import (
 	"net/http"
 
+	"github.com/MogLuiz/Gopportunities-api/schemas"
 	"github.com/gin-gonic/gin"
 )
 
 func ListOpeningsHandler(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, gin.H{
-		"msg": "GET Opening API",
-	})
+	openingsData := []schemas.Opening{}
+
+	if err := db.Find(&openingsData).Error; err != nil {
+		throwErrorToApiUser(ctx, http.StatusInternalServerError, "error listing openings")
+	}
+
+	throwSuccessToApiUser(ctx, "list-openings", openingsData)
 }
